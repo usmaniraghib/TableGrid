@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class TableGrid {
 	public static void main(String[] args) throws InterruptedException {
 		int sum = 0;
-		System.setProperty("webdriver.chrome.driver", "C:\\SELENIUM\\browser-driver\\chromedriver_win32\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\Driver\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		driver.get(
 				"http://www.cricbuzz.com/live-cricket-scorecard/18970/pak-vs-sl-2nd-t20i-pakistan-v-sri-lanka-in-uae-2017");
