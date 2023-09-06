@@ -1,32 +1,40 @@
 package com.raghib.selenium;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-public class TableGrid {
+public class TableGrid extends BaseClass {
+
+	public static WebDriver driver;
+	public static String browserName = "chrome";
+	public static String browserVersion = "116";
+	
+	public static String url = "http://www.cricbuzz.com/live-cricket-scorecard/18970/pak-vs-sl-2nd-t20i-pakistan-v-sri-lanka-in-uae-2017";
+	
 	public static void main(String[] args) throws InterruptedException {
 		int sum = 0;
-		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\Driver\\chromedriver.exe");
-		WebDriver driver = new ChromeDriver();
-		driver.get(
-				"http://www.cricbuzz.com/live-cricket-scorecard/18970/pak-vs-sl-2nd-t20i-pakistan-v-sri-lanka-in-uae-2017");
+		// Chrome Browser
+		driver = BaseClass.getDriver(browserName, browserVersion);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+		driver.manage().window().maximize();
+		driver.get(url);
 
 		WebElement table = driver.findElement(By.cssSelector("div[class='cb-col cb-col-100 cb-ltst-wgt-hdr']"));
-		//int rowcount = table.findElements(By.cssSelector("cb-col cb-col-100 cb-scrd-itms")).size();
+		//Third Column
 		int count = table.findElements(By.cssSelector("div[class='cb-col cb-col-100 cb-scrd-itms'] div:nth-child(3)"))
 				.size();
 
-		for (int i = 0; i < count - 2; i++) {
+		for (int i = 0; i < count-2; i++) {
 			String value = table
 					.findElements(By.cssSelector("div[class='cb-col cb-col-100 cb-scrd-itms'] div:nth-child(3)")).get(i)
 					.getText();
 			int valueinteger = Integer.parseInt(value);
 			sum = sum + valueinteger;// 103
 		}
-		// System.out.println(sum);
-
+		
 		String Extras = driver.findElement(By.xpath("//div[text()='Extras']/following-sibling::div")).getText();
 		int extrasValue = Integer.parseInt(Extras);
 		int TotalSumValue = sum + extrasValue;
@@ -39,7 +47,7 @@ public class TableGrid {
 		} else {
 			System.out.println("count fails");
 		}
-		Thread.sleep(5000);
-		driver.quit();
+		//Thread.sleep(5000);
+		//BaseClass.quitDriver();
 	}
 }
