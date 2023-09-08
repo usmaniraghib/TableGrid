@@ -1,5 +1,13 @@
 package com.raghib.selenium;
 
+/**
+ * Reference:-
+ * C:\STUDY_DATA\TESTING\New folder_2\1-B_SELANIUM\
+ * 0.1Udemy - Selenium WebDriver with Java -Basics to Advanced+Frameworks\
+ * 14. Miscellaneous topics in Selenium WebDriver
+ * 
+ */
+
 import java.time.Duration;
 
 import org.openqa.selenium.By;
@@ -32,13 +40,14 @@ public class TableGrid extends BaseClass {
 					.findElements(By.cssSelector("div[class='cb-col cb-col-100 cb-scrd-itms'] div:nth-child(3)")).get(i)
 					.getText();
 			int valueinteger = Integer.parseInt(value);
-			sum = sum + valueinteger;// 103
+			sum = sum + valueinteger;
 		}
+		System.out.println("Without Extra "+sum); // 120
 		
 		String Extras = driver.findElement(By.xpath("//div[text()='Extras']/following-sibling::div")).getText();
 		int extrasValue = Integer.parseInt(Extras);
-		int TotalSumValue = sum + extrasValue;
-		System.out.println(TotalSumValue);
+		int TotalSumValue = sum + extrasValue; // 120 + 4
+		System.out.println("With Extra "+TotalSumValue); //124
 
 		String ActualTotal = driver.findElement(By.xpath("//div[text()='Total']/following-sibling::div")).getText();
 		int ActualTotalVAlue = Integer.parseInt(ActualTotal);
